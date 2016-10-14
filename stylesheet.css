@@ -1,0 +1,38 @@
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+}
+
+h1 {
+	color: white;
+}
+
+#page-wrapper {
+	height: 100%;
+	/*border: 2px solid black;*/
+	background-color: gray;
+}
+
+/*#background-image {
+	border: 2px dashed darkgray;
+	height: 100%;
+	width: auto;
+}
+
+	#background-image img {
+		width: auto;
+		height: 100%;
+	}*/
+
+#machine-wrapper {
+	background-color: lightgray;
+}
+
+
+.bordered{
+	border: 2px dashed yellow!important;
+	padding: -2px!important;
+}
