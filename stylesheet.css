@@ -6,19 +6,80 @@ body {
 	height: 100%;
 }
 
-h1 {
-	color: white;
-}
-
 #page-wrapper {
 	height: 100%;
 	background-color: gray;
+	transition: background linear 0.5s;
+  -moz-transition: background linear 0.5s;
+  -webkit-transition: background linear 0.5s;
 }
 
 
 #machine-wrapper {
-	background-color: lightgray;
+	height: auto;
+	width: 320px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -110px;
+	margin-left: -160px;
+
 }
+
+	#title {
+		color: white;
+		font-size: 1.8em;
+	}
+	
+	#quotes-area{
+		margin-top: 10px;
+	}
+
+		#quote {
+			color: white;
+			font-size: 1.2em;
+		}
+
+		#author {
+			color: white;
+			font-size: 1.2em;
+			font-style: italic;
+		}
+	
+	#button-area {
+		margin-top: 10px;
+	}
+
+
+
+/* css btn style override*/
+
+.btn {
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	padding: 12px 12px 3px 12px;
+}
+
+.btn-primary, .btn-primary:visited, .btn-primary:focus {
+  background: transparent;
+  color: #FFF;
+  border-color: #FFF;
+  border-width: 2px;
+}
+ 
+.btn-primary:hover {
+  background: transparent;
+  color: #DDD;
+  border-color: #DDD;
+  border-width: 2px;
+}
+ 
+.btn-primary:active, .btn-primary.active {
+    background: transparent!important;
+    border-color: #FFF!important;
+    border-width: 2px!important;
+}
+
 
 
 .bordered{
