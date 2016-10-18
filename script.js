@@ -2,14 +2,17 @@ $(document).ready(function() {
 	
 	//keep track of current status to avoid repetition (to implement)
 	var currentID = 0;
-	var currentColor = "";
+	var currentColor = "#359BE8";
 
 	var bgColor = function() {
-		//generate a new background color
-		var colorArray = ["lightgray", "gray", "darkgray", "black"];
-		var newColor = colorArray[Math.floor(Math.random()*(colorArray.length))];
-		$("#page-wrapper").css("background-color", newColor);
+		//generate a new background color avoiding repetitions
+		var colorArray = ["#55F04E", "#FF58C9", "#9C9C94", "#FFB333", "#359BE8"];
+		var newColor = currentColor;
+		while (newColor === currentColor) {
+			newColor = colorArray[Math.floor(Math.random()*(colorArray.length))];
+		}
 		currentColor = newColor;
+		$("#page-wrapper").css("background-color", currentColor);
 	}
 
 	function loadQuote () {
@@ -18,19 +21,29 @@ $(document).ready(function() {
 		$.getJSON("https://raw.githubusercontent.com/femarchi/random-quote-machine/master/quote-list.json", function (data){
 			var i = 0;
 			var found = false;
-			var quoteId = Math.floor(Math.random()*data.length);
-			//console.log(currentID);
+
+			var quoteId = currentID;
+			while (quoteId === currentID){
+				quoteId = Math.floor(Math.random()*data.length);	
+			}
+			currentID = quoteId;
 			
 			while (!found && i < data.length){
 				if(data[i].ID === quoteId){
-					// console.log(
-					// 						data[i].ID + "\n"
-					// 						+ data[i].quote + "\n"
-					// 						+ data[i].author
-					// 						);
-					$("#quote").html(data[i].quote);
-					$("#author").html(data[i].author);
-					currentID = quoteId;
+					$("#quotes-area").css("opacity", 0);
+					$("#quotes-area").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
+    function() {
+	    			$("#quote").html(data[i].quote);
+						$("#author").html(data[i].author);
+
+						// update twitter share button
+						var tweetText = data[i].quote + " -" + data[i].author;
+						tweetText = encodeURIComponent(tweetText.trim());
+						var tweetLink = "https://twitter.com/intent/tweet?text=" + tweetText;
+						console.log(tweetText);
+						$("#twitter-btn").attr("href", tweetLink);
+	          $("#quotes-area").css("opacity", 1);
+    });
 					found = true;
 				}
 				i++;
@@ -42,6 +55,7 @@ $(document).ready(function() {
 
 	$("#new-quote-button").on("click", function(){
 		// button click changes quote and bgcolor
+		
 		loadQuote();
 		bgColor();
 	});
